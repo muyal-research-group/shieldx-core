@@ -35,6 +35,6 @@ jobs:
         path: dist/
 
     - name: Publish to TestPyPI
-          env:
-            POETRY_PYPI_TOKEN_TESTPYPI: ${{ secrets.TESTPYPI_API_TOKEN }}
-          run: poetry publish -r testpypi --username __token__ --password $POETRY_PYPI_TOKEN_TESTPYPI
+      env:
+        POETRY_PYPI_TOKEN_TESTPYPI: ${{ secrets.TESTPYPI_API_TOKEN }}
+      run: poetry publish -r testpypi --username __token__ --password $POETRY_PYPI_TOKEN_TESTPYPI
