@@ -1,0 +1,21 @@
+[project]
+name = "shieldx-core"
+version = "0.0.1a0"
+description = ""
+authors = [
+    {name = "Ignacio Castillo",email = "ignacio.bcastillo@gmail.com"},
+    {name = "Edgar Balleza",email = "edgar_balleza@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic (>=2.11.7,<3.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "shieldx_core", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
