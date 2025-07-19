@@ -22,6 +22,30 @@ version = "0.0.1a1"
 Follow **Semantic Versioning (SemVer)**:
 - `MAJOR.MINOR.PATCH` → e.g. `1.2.3`
 
+🚀 Pre-Release Versions (alpha, beta, rc)
+
+You can mark versions as pre-releases by appending:
+
+```sh
+<MAJOR>.<MINOR>.<PATCH>-<stage>.<number>
+```
+
+✅ Common Stages:
+| Stage                      | Meaning                                         | Example         |
+| -------------------------- | ----------------------------------------------- | --------------- |
+| **alpha**                  | Early stage, unstable, incomplete features      | `1.2.0-alpha.1` |
+| **beta**                   | More stable, feature-complete but needs testing | `1.2.0-beta.1`  |
+| **rc** (Release Candidate) | Final version unless critical bugs are found    | `1.2.0-rc.1`    |
+
+✅ Poetry follows PEP 440 standards for versioning:
+
+- ```alpha``` → ```a```
+
+- ```beta``` → ```b```
+
+- ```rc``` → ```rc```
+
+
 #### 2️⃣ **Commit the Change**
 
 ```bash
@@ -49,3 +73,5 @@ When the tag is pushed:
 - It is published to:
 
     - ✅ TestPyPI if configured for testing
+
+
