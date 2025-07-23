@@ -7,8 +7,7 @@ class MessageWithIDDTO(BaseModel):
     id: str
 
 
-class EventDTO(BaseModel):
-    
+class EventCreateDTO(BaseModel):
     service_id: str
     microservice_id: str
     function_id: str
@@ -20,7 +19,22 @@ class EventDTO(BaseModel):
         "from_attributes": True  # <- permite convertir desde EventModel sin usar .dict()
     }
 
-class EventTypeDTO(BaseModel):
+class EventResponseDTO(BaseModel):
+    id: str = Field(alias="_id")
+    service_id: str
+    microservice_id: str
+    function_id: str
+    event_type: str
+    payload: Optional[Any] = None
+    timestamp: datetime
+
+    model_config = {
+        "populate_by_name": True,
+        "from_attributes": True
+    }
+
+
+class EventTypeCreateDTO(BaseModel):
     event_type: str
 
     model_config = {
@@ -29,6 +43,17 @@ class EventTypeDTO(BaseModel):
             "use_aliases": True
         }
     }
+
+class EventTypeResponseDTO(BaseModel):
+    id: str = Field(alias="_id")
+    event_type: str
+    timestamp: datetime
+
+    model_config = {
+        "populate_by_name": True,
+        "from_attributes": True
+    }
+
 class EventsTriggersDTO(BaseModel):
     event_type_id: str
     trigger_id: str
@@ -38,7 +63,7 @@ class EventsTriggersDTO(BaseModel):
         "from_attributes": True
     }
 
-class RuleDTO(BaseModel):
+class RuleCreateDTO(BaseModel):
     target: str
     parameters: Dict[str, Any]
 
@@ -46,18 +71,36 @@ class RuleDTO(BaseModel):
         "populate_by_name": True
     }
 
-
 class RulesTriggerDTO(BaseModel):
     rule_id: str
     trigger_id: str
 
+class RuleResponseDTO(BaseModel):
+    id: str = Field(alias="_id")
+    target: str
+    parameters: Dict[str, Any]
 
-class TriggerDTO(BaseModel):
+    model_config = {
+        "populate_by_name": True,
+        "from_attributes": True
+    }
+
+class TriggerCreateDTO(BaseModel):
     name: str
 
     model_config = {
         "populate_by_name": True
     }
+
+class TriggerResponseDTO(BaseModel):
+    id: str = Field(alias="_id")
+    name: str
+
+    model_config = {
+        "populate_by_name": True,
+        "from_attributes": True
+    }
+
 class TriggersTriggersDTO(BaseModel):
     trigger_parent_id: str
     trigger_child_id: str
