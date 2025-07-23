@@ -2,19 +2,9 @@ from pydantic import BaseModel,Field
 from typing import Any, Optional,Dict
 from datetime import datetime,timezone
 
-class DeleteResultDTO(BaseModel):
-    deleted: bool
-
-
-class IDResponseDTO(BaseModel):
-    id: str
-
 class MessageWithIDDTO(BaseModel):
     message: str
-    event_id: str
-
-class MessageDTO(BaseModel):
-    message: str
+    id: str
 
 
 class EventDTO(BaseModel):
@@ -24,7 +14,6 @@ class EventDTO(BaseModel):
     function_id: str
     event_type: str
     payload: Optional[Any] = None
-    timestamp: datetime
 
     model_config = {
         "populate_by_name": True,
@@ -32,9 +21,7 @@ class EventDTO(BaseModel):
     }
 
 class EventTypeDTO(BaseModel):
-    event_type_id: str = Field(alias="_id")
     event_type: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     model_config = {
         "populate_by_name": True,
@@ -46,14 +33,12 @@ class EventsTriggersDTO(BaseModel):
     event_type_id: str
     trigger_id: str
 
-
     model_config = {
         "populate_by_name": True,
         "from_attributes": True
     }
 
 class RuleDTO(BaseModel):
-    rule_id: str = Field(..., alias="_id")
     target: str
     parameters: Dict[str, Any]
 
@@ -68,9 +53,7 @@ class RulesTriggerDTO(BaseModel):
 
 
 class TriggerDTO(BaseModel):
-    trigger_id: Optional[str] = Field(default=None, alias="_id")
     name: str
-
 
     model_config = {
         "populate_by_name": True
