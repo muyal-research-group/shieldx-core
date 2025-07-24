@@ -20,7 +20,7 @@ class EventCreateDTO(BaseModel):
     }
 
 class EventResponseDTO(BaseModel):
-    id: str = Field(alias="_id")
+    Event_id: str = Field(alias="_id")
     service_id: str
     microservice_id: str
     function_id: str
@@ -55,7 +55,7 @@ class EventTypeCreateDTO(BaseModel):
     }
 
 class EventTypeResponseDTO(BaseModel):
-    id: str = Field(alias="_id")
+    event_type_id: str = Field(alias="_id")
     event_type: str
     timestamp: datetime
 
@@ -94,7 +94,7 @@ class RuleUpdateDTO(BaseModel):
     }
 
 class RuleResponseDTO(BaseModel):
-    id: str = Field(alias="_id")
+    rule_id: str = Field(alias="_id")
     target: str
     parameters: Dict[str, Any]
 
@@ -112,7 +112,7 @@ class TriggerCreateDTO(BaseModel):
     }
 
 class TriggerResponseDTO(BaseModel):
-    id: str = Field(alias="_id")
+    trigger_id: str = Field(alias="_id")
     name: str
 
     model_config = {
