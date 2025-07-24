@@ -33,6 +33,16 @@ class EventResponseDTO(BaseModel):
         "from_attributes": True
     }
 
+class EventUpdateDTO(BaseModel):
+    service_id: Optional[str] = None
+    microservice_id: Optional[str] = None
+    function_id: Optional[str] = None
+    event_type: Optional[str] = None
+    payload: Optional[Any] = None
+
+    model_config = {
+        "populate_by_name": True
+    }
 
 class EventTypeCreateDTO(BaseModel):
     event_type: str
@@ -75,6 +85,14 @@ class RulesTriggerDTO(BaseModel):
     rule_id: str
     trigger_id: str
 
+class RuleUpdateDTO(BaseModel):
+    target: Optional[str] = None
+    parameters: Optional[Dict[str, Any]] = None
+
+    model_config = {
+        "populate_by_name": True
+    }
+
 class RuleResponseDTO(BaseModel):
     id: str = Field(alias="_id")
     target: str
@@ -84,6 +102,7 @@ class RuleResponseDTO(BaseModel):
         "populate_by_name": True,
         "from_attributes": True
     }
+
 
 class TriggerCreateDTO(BaseModel):
     name: str
@@ -99,6 +118,13 @@ class TriggerResponseDTO(BaseModel):
     model_config = {
         "populate_by_name": True,
         "from_attributes": True
+    }
+
+class TriggerUpdateDTO(BaseModel):
+    name: Optional[str] = None
+
+    model_config = {
+        "populate_by_name": True
     }
 
 class TriggersTriggersDTO(BaseModel):
