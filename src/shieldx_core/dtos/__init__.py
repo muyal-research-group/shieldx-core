@@ -20,7 +20,7 @@ class EventCreateDTO(BaseModel):
     }
 
 class EventResponseDTO(BaseModel):
-    Event_id: str = Field(alias="_id")
+    event_id: str = Field(alias="_id")
     service_id: str
     microservice_id: str
     function_id: str
