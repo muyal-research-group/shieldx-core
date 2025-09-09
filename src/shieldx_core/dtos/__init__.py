@@ -73,9 +73,31 @@ class EventsTriggersDTO(BaseModel):
         "from_attributes": True
     }
 
+class TargetDTO(BaseModel):
+    alias: Optional[str] = None
+    bucket_id: Optional[str] = None
+    key: Optional[str] = None
+    method: str = "run"
+
+    model_config = {
+        "populate_by_name": True
+    }
+
+class ParameterDetailDTO(BaseModel):
+    ref: Optional[str] = None
+    ref_dollar: Optional[str] = Field(default=None, alias="$ref")
+    value: Optional[Any] = None
+    type_: Optional[str] = Field(default=None, alias="type")
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+    model_config = {
+        "populate_by_name": True
+    }
+
 class RuleCreateDTO(BaseModel):
-    target: str
-    parameters: Dict[str, Any]
+    target: TargetDTO
+    parameters: Dict[str, ParameterDetailDTO]
 
     model_config = {
         "populate_by_name": True
@@ -86,8 +108,8 @@ class RulesTriggerDTO(BaseModel):
     trigger_id: str
 
 class RuleUpdateDTO(BaseModel):
-    target: Optional[str] = None
-    parameters: Optional[Dict[str, Any]] = None
+    target: Optional[TargetDTO] = None
+    parameters: Optional[Dict[str, ParameterDetailDTO]] = None
 
     model_config = {
         "populate_by_name": True
@@ -95,8 +117,8 @@ class RuleUpdateDTO(BaseModel):
 
 class RuleResponseDTO(BaseModel):
     rule_id: str = Field(alias="_id")
-    target: str
-    parameters: Dict[str, Any]
+    target: TargetDTO
+    parameters: Dict[str, ParameterDetailDTO]
 
     model_config = {
         "populate_by_name": True,
