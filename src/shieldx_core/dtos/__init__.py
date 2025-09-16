@@ -95,9 +95,17 @@ class ParameterDetailDTO(BaseModel):
         "populate_by_name": True
     }
 
+class ParametersBlockDTO(BaseModel):
+    init: Dict[str, ParameterDetailDTO] = Field(default_factory=dict)
+    call: Dict[str, ParameterDetailDTO] = Field(default_factory=dict)
+
+    model_config = {
+        "populate_by_name": True
+    }
+
 class RuleCreateDTO(BaseModel):
     target: TargetDTO
-    parameters: Dict[str, ParameterDetailDTO]
+    parameters: ParametersBlockDTO
 
     model_config = {
         "populate_by_name": True
@@ -109,7 +117,7 @@ class RulesTriggerDTO(BaseModel):
 
 class RuleUpdateDTO(BaseModel):
     target: Optional[TargetDTO] = None
-    parameters: Optional[Dict[str, ParameterDetailDTO]] = None
+    parameters: Optional[ParametersBlockDTO] = None
 
     model_config = {
         "populate_by_name": True
@@ -118,7 +126,7 @@ class RuleUpdateDTO(BaseModel):
 class RuleResponseDTO(BaseModel):
     rule_id: str = Field(alias="_id")
     target: TargetDTO
-    parameters: Dict[str, ParameterDetailDTO]
+    parameters: ParametersBlockDTO
 
     model_config = {
         "populate_by_name": True,
@@ -128,6 +136,7 @@ class RuleResponseDTO(BaseModel):
 
 class TriggerCreateDTO(BaseModel):
     name: str
+    depends_on: Optional[str] = None
 
     model_config = {
         "populate_by_name": True
@@ -136,6 +145,7 @@ class TriggerCreateDTO(BaseModel):
 class TriggerResponseDTO(BaseModel):
     trigger_id: str = Field(alias="_id")
     name: str
+    depends_on: Optional[str] = None
 
     model_config = {
         "populate_by_name": True,
@@ -144,10 +154,12 @@ class TriggerResponseDTO(BaseModel):
 
 class TriggerUpdateDTO(BaseModel):
     name: Optional[str] = None
-
+    depends_on: Optional[str] = None
+    
     model_config = {
         "populate_by_name": True
     }
+
 
 class TriggersTriggersDTO(BaseModel):
     trigger_parent_id: str
