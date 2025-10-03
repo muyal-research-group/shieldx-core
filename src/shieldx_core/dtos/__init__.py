@@ -1,5 +1,5 @@
 from pydantic import BaseModel,Field
-from typing import Any, Optional,Dict
+from typing import Any, Optional,Dict,List
 from datetime import datetime,timezone
 
 class MessageWithIDDTO(BaseModel):
@@ -164,3 +164,31 @@ class TriggerUpdateDTO(BaseModel):
 class TriggersTriggersDTO(BaseModel):
     trigger_parent_id: str
     trigger_child_id: str
+
+class RuleTargetDTO(BaseModel):
+    alias: str
+    axo_bucket_id: str
+    axo_endpoint_id: str
+
+class RuleDTO(BaseModel):
+    target: RuleTargetDTO
+
+class ParamsDTO(BaseModel):
+    init: Optional[Dict[str, str]] = None
+    call: Optional[Dict[str, str]] = None
+
+class NodeDTO(BaseModel):
+    id: str
+    type: str  # "ActiveObject" | "Bucket"
+    name: Optional[str] = None
+    rule: Optional[RuleDTO] = None
+    params: Optional[ParamsDTO] = None
+    sink_bucket_id: Optional[str] = None  # para Buckets
+
+class EdgeDTO(BaseModel):
+    from_: str = Field(..., alias="from")
+    to: str
+
+class GraphSpecDTO(BaseModel):
+    vertices: List[NodeDTO]
+    edges: List[EdgeDTO] = []
