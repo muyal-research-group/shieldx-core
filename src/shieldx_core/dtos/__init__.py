@@ -165,6 +165,12 @@ class TriggersTriggersDTO(BaseModel):
     trigger_parent_id: str
     trigger_child_id: str
 
+class DeploymentInfoDTO(BaseModel):
+    """Información de red necesaria para ejecutar un objeto activo."""
+    host: str
+    req_res_port: int
+    pubsub_port: int
+
 class RuleTargetDTO(BaseModel):
     alias: str
     axo_bucket_id: str
@@ -183,12 +189,14 @@ class NodeDTO(BaseModel):
     name: Optional[str] = None
     rule: Optional[RuleDTO] = None
     params: Optional[ParamsDTO] = None
-    sink_bucket_id: Optional[str] = None  # para Buckets
+    deployment_info: Optional[DeploymentInfoDTO] = None
 
 class EdgeDTO(BaseModel):
     from_: str = Field(..., alias="from")
     to: str
 
-class GraphSpecDTO(BaseModel):
+
+class EnrichedGraphSpecDTO(BaseModel):
+    
     vertices: List[NodeDTO]
     edges: List[EdgeDTO] = []
