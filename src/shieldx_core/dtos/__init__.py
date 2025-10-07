@@ -190,6 +190,14 @@ class NodeDTO(BaseModel):
     rule: Optional[RuleDTO] = None
     params: Optional[ParamsDTO] = None
     deployment_info: Optional[DeploymentInfoDTO] = None
+    sink_bucket_id: Optional[str] = None
+
+    @field_validator("sink_bucket_id")
+    def validate_sink_id(cls, v, info: ValidationInfo):
+        node_type = info.data.get("type") if info.data else None
+        if node_type == "ActiveObject" and v is not None:
+            raise ValueError("sink_bucket_id solo es válido para nodos tipo 'Bucket'")
+        return v
 
 class EdgeDTO(BaseModel):
     from_: str = Field(..., alias="from")
