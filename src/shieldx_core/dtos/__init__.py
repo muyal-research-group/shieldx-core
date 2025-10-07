@@ -183,6 +183,7 @@ class ParamsDTO(BaseModel):
     init: Optional[Dict[str, str]] = None
     call: Optional[Dict[str, str]] = None
 
+
 class NodeDTO(BaseModel):
     id: str
     type: str  # "ActiveObject" | "Bucket"
@@ -198,13 +199,25 @@ class NodeDTO(BaseModel):
         if node_type == "ActiveObject" and v is not None:
             raise ValueError("sink_bucket_id solo es válido para nodos tipo 'Bucket'")
         return v
+    
+    model_config = {
+        "populate_by_name": True
+    }
 
 class EdgeDTO(BaseModel):
     from_: str = Field(..., alias="from")
     to: str
+
+    model_config = {
+        "populate_by_name": True
+    }
 
 
 class EnrichedGraphSpecDTO(BaseModel):
     
     vertices: List[NodeDTO]
     edges: List[EdgeDTO] = []
+
+    model_config = {
+        "populate_by_name": True
+    }
